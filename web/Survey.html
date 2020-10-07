@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <title>CS Department Survey</title>
+    <script type="text/javascript">
+        function reset()
+        {
+            location.reload();
+        }
+    </script>
+</head>
+<body style="background-color: lightgray; margin: 5%">
+<h1>Feedback Form</h1>
+<form id="theForm" autocomplete="on" action="submitForm">
+    <p><label>First Name:
+        <input id="fName" name="fName" type="text" size="20" maxlength="20" autofocus required/>
+    </label><label>Last Name:
+        <input id="lName" name="lName" type="text" size="20" maxlength="20" required/>
+    </label></p>
+    <p><label>Street Address:
+        <input id="address" name="address" type="text" size="30" maxlength="50" required/>
+    </label></p>
+    <p><label>City:
+        <input id="city" name="city" type="text" size="25" maxlength="50" required/>
+    </label><label>State:
+        <input id="state" name="state" type="text" size="2" maxlength="2" required/>
+    </label><label>Zip Code:
+        <input id="zip" name="zip" type="text" size="5" maxlength="5" required/>
+    </label></p>
+    <p><label>Telephone Number:
+        <input name="phone" type="tel" placeholder="0123456789" required/>
+    </label></p>
+    <p><label>Email:
+        <input id="email" name="email" type="email" placeholder="johndoe@gmail.com" required/>
+    </label></p>
+    <p><label>Date of Survey:
+        <input name="date" type="date" placeholder="02/12/2020" required/>
+    </label></p><br/>
+    <p>
+        <strong>*What did you like most about Mason?</strong><br/>
+        <label>students
+            <input name="likedMost" type="checkbox" value="students"/></label>
+        <label>location
+            <input name="likedMost" type="checkbox" value="location"/></label>
+        <label>campus
+            <input name="likedMost" type="checkbox" value="campus"/></label>
+        <label>atmosphere
+            <input name="likedMost" type="checkbox" value="atmosphere"/></label>
+        <label>dorm rooms
+            <input name="likedMost" type="checkbox" value="rooms"/></label>
+        <label>sports
+            <input name="likedMost" type="checkbox" value="sports"/></label>
+    </p>
+    <p>
+        <strong>*How did you become interested in Mason?</strong><br/>
+        <label>friends
+            <input name="interested" type="radio" value="friends"/></label>
+        <label>television
+            <input name="interested" type="radio" value="television"/></label>
+        <label>Internet
+            <input name="interested" type="radio" value="Internet"/></label>
+        <label>other
+            <input name="interested" type="radio" value="other"/></label>
+    </p>
+    <p><label><strong>What's the likelihood of you recommending Mason to others?</strong>
+        <select name="rating">
+            <option selected>Very Likely</option>
+            <option>Likely</option>
+            <option>Unlikely</option>
+        </select>
+    </label></p>
+    <p><label><strong>RAFFLE: Enter 10 numbers in the range [1,100] separated by commas:</strong><br/>
+        <textarea id="raffle" name="raffle" rows="1" cols="60" placeholder="For example: 1,5,59,71,87,17,32,40,93,100"></textarea>
+    </label></p>
+
+    <p><label><strong>Comments:</strong><br/>
+        <textarea name="comments" rows="4" cols="36" placeholder="Enter comments here."></textarea>
+    </label></p>
+    <p>
+        <input type="submit" value="Cancel" onclick="reset()"/>
+        <input type="submit" value="Submit" onclick="validate()"/>
+    </p>
+</form>
+<div  class="w3-right" align="right">
+    <a href="https://www2.gmu.edu/"><img src="masonLogo.png" style="margin: 10px" width="30%" alt="Mason"></a>
+</div>
+</body>
+</html>
