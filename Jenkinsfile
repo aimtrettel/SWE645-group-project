@@ -14,7 +14,7 @@ pipeline {
         script {
           sh 'rm -rf *.war'
           sh 'jar -cvf Survey.war web/*'
-          sh "docker login -u aimnissley -p ${DOCKERHUB_PASS}"
+          sh "docker login -u aimnissley -p ${DOCKERHUB_PASS_PSW}"
           def customImage = docker.build("aimnissley/swe645:${BUILD_NUMBER}")
         }
       }
