@@ -9,7 +9,7 @@ pipeline {
         script {
           checkout scm
           sh 'rm -rf *.war'
-          sh 'jar -cvf Survey.war -C WebContent/ .'
+          sh 'jar -cvf Survey.war web/*'
           sh 'echo ${BUILD_TIMESTAMP}'
           sh "docker login -u aimnissley -p ${DOCKERHUB_PASS}"
           def customImage = docker.build("aimnissley/swe645:${BUILD_TIMESTAMP}")
