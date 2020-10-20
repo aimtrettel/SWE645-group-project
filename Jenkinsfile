@@ -27,8 +27,7 @@ pipeline {
     }
     stage("Deploying to Rancher") {
       steps {
-        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:${BUILD_NUMBER} -n jenkins-pipeline'
-        sh 'kubectl set image deployment/swe645-lb swe645645-lb=aimnissley/swe645:${BUILD_NUMBER} -n jenkins-pipeline'
+        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:${BUILD_NUMBER} --kubeconfig /home/Jenkins/.kube/config'
       }
     }
   }
