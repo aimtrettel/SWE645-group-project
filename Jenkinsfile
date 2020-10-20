@@ -4,15 +4,18 @@ pipeline {
     DOCKERHUB_PASS = credentials('dockerhub')
   }
   stages {
+    stage("Checkout") {
+      steps {
+        checkout scm
+      }
+    }
     stage("Building the Student Survey Image") {
       steps {
         script {
-          checkout scm
           sh 'rm -rf *.war'
           sh 'jar -cvf Survey.war web/*'
-          sh 'echo ${BUILD_TIMESTAMP}'
           sh "docker login -u aimnissley -p ${DOCKERHUB_PASS}"
-          def customImage = docker.build("aimnissley/swe645:${BUILD_TIMESTAMP}")
+          def customImage = docker.build("aimnissley/swe645:${BUILD_NUMBER}")
         }
       }
     }
