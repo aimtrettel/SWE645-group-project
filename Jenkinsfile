@@ -2,7 +2,7 @@ pipeline {
   agent any
   environment {
     registry = "aimnissley/swe645"
-    DOCKERHUB_PASS = credentials('dockerhub')
+    registryCredential = 'dockerhub'
     dockerImage = ''
   }
   stages {
@@ -19,7 +19,7 @@ pipeline {
     stage("Pushing Image to DockerHub") {
       steps {
         script {
-          docker.withRegistry( '', DOCKERHUB_PASS ) {
+          docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
           }
         }
