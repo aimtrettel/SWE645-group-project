@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<div>
+  <h1>Here is a list of all the surveys filled out to date!</h1>
+  <br>
+  <h3>Click <b><u><a role="button" (click)="loadMenu();">here</a></u></b> to go back to the main menu</h3>
+	<br>
+  <section *ngIf="students" class = "panel-body">
+	  <table class = "table-striped table-bordered table-hover table-condensed">
+		  <tr *ngFor="let student of students">
+			  <td><a href="#" [routerLink]="['/student', student.sid]">
+					{{student.sid}} </a>&nbsp;&nbsp;</td>
+	  </table>
+  </section>
+</div>

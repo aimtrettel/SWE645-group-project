@@ -1,0 +1,33 @@
+<div *ngIf="student">
+  <h1>Student's form data:</h1>
+  <p><label>Student ID Number: {{student.sid}}
+    </label></p>
+  <p><label>Name: {{student.fName}} {{student.lName}}
+    </label></p>
+  <p><label>Street Address: {{student.address}}
+    </label></p>
+  <p><label>City: {{student.city}}
+    </label></p>
+  <p><label>State: {{student.state}}
+    </label></p>
+  <p><label>Zip Code: {{student.zip}}
+    </label></p>
+  <p><label> Telephone Number: {{student.phone}}
+    </label></p>
+  <p><label>Email: {{student.email}}
+    </label></p>
+  <p><label>Date of Survey: {{student.date}}
+    </label></p><br />
+  <p>
+    <strong>What did you like most about Mason?</strong><br />
+    <label>{{student.likes}}</label>
+  </p>
+  <p>
+    <strong>How did you become interested in Mason?</strong><br />
+    <label>{{student.interested}}</label>
+  </p>
+  <p>
+    <strong>What's the likelihood of you recommending Mason to others?</strong><br />
+    <label>{{student.rating}}</label>
+  </p>
+</div>

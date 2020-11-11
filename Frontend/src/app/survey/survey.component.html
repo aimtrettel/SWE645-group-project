@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+
+<body style="background-color: lightgray; margin: 5%">
+  <div>
+    <h1>Feedback Form</h1>
+    <p>* - Starred items are required</p>
+    <form #survey="ngForm" autocomplete="on" (ngSubmit)="onClickSubmit(survey.value)">
+      <p><label>*Student ID number:
+          <input name="sid" type="text" size="10" maxlength="8" autofocus required ngModel />
+        </label></p>
+      <p><label>*First Name:
+          <input name="fName" type="text" size="20" maxlength="20" required ngModel />
+        </label><label>*Last Name:
+          <input name="lName" type="text" size="20" maxlength="20" required ngModel />
+        </label></p>
+      <p><label>*Street Address:
+          <input name="address" type="text" size="30" maxlength="50" required ngModel />
+        </label></p>
+      <p><label>*City:
+          <input name="city" type="text" size="25" maxlength="50" required ngModel />
+        </label><label>*State:
+          <input name="state" type="text" size="2" maxlength="2" required ngModel />
+        </label><label>*Zip Code:
+          <input name="zip" type="text" size="5" maxlength="5" required ngModel />
+        </label></p>
+      <p><label> *Telephone Number:
+          <input name="phone" type="tel" placeholder="0123456789" ngModel />
+        </label></p>
+      <p><label>*Email:
+          <input name="email" type="email" placeholder="johndoe@gmail.com" required ngModel />
+        </label></p>
+      <p><label>*Date of Survey:
+          <input name="date" type="date" placeholder="02/12/2020" required ngModel />
+        </label></p><br />
+      <p>
+        <strong>What did you like most about Mason?</strong><br />
+        <div *ngFor="let option of options">
+          <label> {{option.value}}
+            <input type="checkbox" name="options" value="{{option.value}}" [(ngModel)]="option.checked"/>
+          </label>
+        </div>
+      <p>
+        <strong>How did you become interested in Mason?</strong><br />
+        <label>friends
+          <input name="interested" type="radio" value="friends" ngModel /></label>
+        <label>television
+          <input name="interested" type="radio" value="television" ngModel /></label>
+        <label>Internet
+          <input name="interested" type="radio" value="Internet" ngModel /></label>
+        <label>other
+          <input name="interested" type="radio" value="other" ngModel /></label>
+      </p>
+      <p><label><strong>What's the likelihood of you recommending Mason to others?</strong>
+          <select name="rating" ngModel>
+            <option selected>Very Likely</option>
+            <option>Likely</option>
+            <option>Unlikely</option>
+          </select>
+        </label></p>
+      
+      <p>
+        <input type="button" value="Cancel" onclick="reset()" />
+        <input type="submit" value="Submit" onclick="validate()" ngModel />
+      </p>
+    </form>
+  </div>
+</body>
