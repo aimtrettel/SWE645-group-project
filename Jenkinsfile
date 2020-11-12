@@ -12,15 +12,15 @@ pipeline {
             script {
               checkout scm
               sh 'rm -rf *.war'
-              sh 'jar -cvf Backend.war Backend/content/*'
-              backendImage = docker.build("aimnissley/swe645:B-$BUILD_NUMBER", "Backend/Dockerfile")
+              sh 'jar -cvf Backend/Backend.war Backend/content/*'
+              backendImage = docker.build("aimnissley/swe645:B-$BUILD_NUMBER", "Backend")
             }
           }
         }
     stage("Building the Frontend Image") {
       steps {
         script {
-          frontendImage = docker.build("aimnissley/swe645:F-$BUILD_NUMBER", "Frontend/Dockerfile")
+          frontendImage = docker.build("aimnissley/swe645:F-$BUILD_NUMBER", "Frontend")
         }
       }
     }
