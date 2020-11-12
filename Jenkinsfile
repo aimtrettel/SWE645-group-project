@@ -3,31 +3,45 @@ pipeline {
   environment {
     registry = "aimnissley/swe645"
     registryCredential = 'dockerhub'
-    dockerImage = ''
+    frontendImage = ''
+    backendImage = ''
   }
   stages {
-    stage("Building the Student Survey Image") {
+    stage("Building the Backend Image") {
+          steps {
+            script {
+              checkout scm
+              sh 'cd Backend'
+              sh 'rm -rf *.war'
+              sh 'jar -cvf Backend.war content/*'
+              backendImage = docker.build registry + ":B:$BUILD_NUMBER"
+              sh 'cd ..'
+            }
+          }
+        }
+    stage("Building the Frontend Image") {
       steps {
         script {
-          checkout scm
+          sh 'cd Frontend'
           sh 'rm -rf *.war'
-          sh 'jar -cvf Survey.war web/*'
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          sh 'jar -cvf Frontend.war src/*'
+          frontendImage = docker.build registry + ":F:$BUILD_NUMBER"
         }
       }
     }
-    stage("Pushing Image to DockerHub") {
+    stage("Pushing Images to DockerHub") {
       steps {
         script {
           docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
+            backendImage.push()
+            frontendImage.push()
           }
         }
       }
     }
     stage("Deploying to Rancher") {
       steps {
-        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:${BUILD_NUMBER} --kubeconfig /home/Jenkins/.kube/config'
+        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:B:${BUILD_NUMBER} --kubeconfig /home/Jenkins/.kube/config'
       }
     }
   }
