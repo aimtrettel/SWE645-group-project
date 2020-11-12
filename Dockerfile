@@ -1,24 +1,11 @@
-# base image
-FROM node:12.2.0
-
-# install chrome for protractor tests
-RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-RUN sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
-RUN apt-get update && apt-get install -yq google-chrome-stable
-
-# set working directory
-WORKDIR /Frontend
-
-# add `/app/node_modules/.bin` to $PATH
-ENV PATH /Frontend/node_modules/.bin:$PATH
-
-# install and cache app dependencies
-COPY Frontend/package.json /Frontend/package.json
+# Stage 1
+FROM node:10-alpine as build-step
+RUN mkdir -p /app
+WORKDIR /app
+COPY Frontend/package.json /app
 RUN npm install
-RUN npm install -g @angular/cli@7.3.9
-
-# add app
-COPY Frontend /Frontend
-
-# start app
-CMD ng serve --host 0.0.0.0 --port 4200
+COPY ./Frontend /app
+RUN npm run build --prod
+# Stage 2
+FROM nginx:1.17.1-alpine
+COPY --from=build-step /app/dist/hello-world /usr/share/nginx/html
