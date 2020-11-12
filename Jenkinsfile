@@ -13,7 +13,7 @@ pipeline {
               checkout scm
               sh 'rm -rf *.war'
               sh 'jar -cvf Backend.war Backend/content/*'
-              backendImage = docker.build registry + ":B-$BUILD_NUMBER"
+              //backendImage = docker.build registry + ":B-$BUILD_NUMBER"
             }
           }
         }
@@ -22,7 +22,7 @@ pipeline {
         script {
           sh 'rm -rf *.war'
           sh 'jar -cvf Frontend.war Frontend/src/*'
-          //frontendImage = docker.build registry + ":F-$BUILD_NUMBER"
+          frontendImage = docker.build registry + ":F-$BUILD_NUMBER"
         }
       }
     }
@@ -30,15 +30,15 @@ pipeline {
       steps {
         script {
           docker.withRegistry( '', registryCredential ) {
-            backendImage.push()
-            //frontendImage.push()
+            //backendImage.push()
+            frontendImage.push()
           }
         }
       }
     }
     stage("Deploying to Rancher") {
       steps {
-        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:B-${BUILD_NUMBER} --kubeconfig /home/Jenkins/.kube/config'
+        sh 'kubectl set image deployment/swe645 swe645=aimnissley/swe645:F-${BUILD_NUMBER} --kubeconfig /home/Jenkins/.kube/config'
       }
     }
   }
