@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement
 @Entity
-@Table(name = "STUDENT", schema = "SURVEYS")
+@Table(name = "SURVEYS", schema = "swe645DB")
 public class Student implements java.io.Serializable {
 	private static final long serialVersionUID = 1L;
 	private String sid;
@@ -35,7 +35,7 @@ public class Student implements java.io.Serializable {
 	}
 	
 	@Id
-	@Column(name = "ID")
+	@Column(name = "ID", length = 8)
 	public String getSid() {return sid;}
 	public void setSid(String s) {this.sid = s;}
 	
